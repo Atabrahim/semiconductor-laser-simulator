@@ -49,3 +49,41 @@ checks the transcendental solution rather than reusing the same root formula.
 All outputs are ANALYTICAL MODEL or NUMERICAL MODEL results. Literature material
 parameters are REFERENCE DATA. No EXPERIMENTAL DATA or calibrated device claims.
 Further gain and dynamics equations will be documented as implemented and tested.
+
+## Confined carrier populations
+
+For a parabolic subband with edge Ei (eV), in-plane mass m (kg), temperature
+T (K), and chemical potential mu (eV), count two spin states in d²k/(2pi)².
+The resulting sheet DOS is D = m/(pi hbar²), units J^-1 m^-2, including spin
+exactly once. There is one Gamma valley. Integrating the Fermi occupation gives
+
+    n_sheet = sum_i D kB T log[1 + exp((mu - Ei) q/(kB T))].
+
+Here q converts eV to joules, kB is Boltzmann's constant, and hbar is the reduced
+Planck constant. Numerically, logaddexp prevents overflow. Density inversion is
+monotone and bracketed using the lowest/highest subband edges; it does not rely
+on an optimizer initial guess. Zero density has mu = minus infinity.
+
+Electron mu_e = Fn - Ec; hole mu_h = Ev - Fp. Both quasiparticle dispersions
+increase upward from their own positive confinement energies. Thus
+Fn - Fp = Eg + mu_e + mu_h, not Eg + mu_e - mu_h. Equal injected electron/hole
+sheet densities impose neutrality in this undoped-well model. Electron and
+heavy-hole in-plane masses differ from the heavy-hole growth-direction mass.
+
+N_active = n_sheet/Lw (m^-3) uses geometric well width Lw (m). It is a volume
+normalization for subsequent laser equations, not a bulk population model or
+spatial density profile. Wavefunction tails are retained in optical overlaps;
+they do not change this declared volume convention. Identical multiple wells
+each have this sheet density; they must not each receive the entire injection.
+
+Limitations: confined subbands only, with unbounded parabolic in-plane dispersion;
+no light holes, barrier continuum, leakage, band mixing, Coulomb corrections or
+nonparabolicity. High quasi-Fermi levels approaching barrier energies signal
+failure of a confined-carrier interpretation. The mathematics accepts wider
+densities to test asymptotic limits; this is not a physical validity claim.
+
+Independent validation counts states by radial k-space quadrature rather than
+integrating the DOS analytically. Additional tests cover the Boltzmann and filled
+Fermi-disk limits, zero population, density inversion, and unit conversion.
+Reference: F. Rana, Cornell ECE407, *Density of States in Quantum Wells*,
+https://courses.cit.cornell.edu/ece407/Lectures/handout26.pdf.

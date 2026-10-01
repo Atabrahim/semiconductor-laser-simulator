@@ -34,14 +34,17 @@ numerical outputs. SI internally; conversion boundaries explicitly named.
 ## Milestones
 - Audit and scope: VERIFIED
 - Repository scaffold/recovery record: VERIFIED, PUBLISHED
-- Material and quantum-well source: VERIFIED, PUBLISHED; supporting tests/docs publication in progress
-- Populations and gain: NOT STARTED
+- Material and quantum-well source, tests and documentation: VERIFIED, PUBLISHED
+- Carrier populations source and tests: VERIFIED, PUBLISHED
+- Optical gain: NOT STARTED
 - Cavity, threshold and dynamics: NOT STARTED
 - Reproducible studies/figures/documentation: NOT STARTED
 - Adversarial audit, package, CI, release: NOT STARTED
 
 ## Scientific validation and test status
-Six scientific tests pass: GaAs reference gap, mass-interface matching, normalization, infinite-barrier limit, width/barrier trends and an independent conservative finite-difference refinement.
+11 tests pass (1 October 2026, 0.37 s). Ruff passes. Six confinement tests plus
+five population tests: independent radial k-space integration, Boltzmann/degenerate
+limits, single/multiple-subband inversion, neutrality conventions and invalid inputs.
 Required checks: finite-well roots vs independent finite differences, infinite-well
 limit, carrier-population integrals, gain sign/transparency, cavity round trip,
 steady-state balance vs integration, independent integrators/tolerance refinement,
@@ -54,12 +57,12 @@ prescribed junction temperature; no self-heating prediction. No experimental
 validation claimed. AI-assisted development and execution of validation.
 
 ## Next action
-Publish material/finite-well milestone; next implement quasi-Fermi populations and gain.
+Implement and independently validate optical gain; do not repeat confinement work.
 
 ## Latest verified GitHub checkpoint
-0d322a924d6294f4f6ba2daebf489bfb687eb712 — material and quantum-well source;
-remote source compared byte-for-byte with local files on 1 October 2026.
-Publication gate rerun: 6 passed in 0.37 s; no solver changes.
+af817705087010c78f17d793797fa1b1f544621b — population tests, following
+2b9f16c (population source). Source/tests compared with fetched GitHub contents.
+This field records the verified preceding checkpoint, not its own future commit.
 
 ## Resolved validation findings
 The independent finite-difference benchmark initially used the wrong average at
