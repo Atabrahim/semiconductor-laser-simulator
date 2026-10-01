@@ -33,15 +33,15 @@ numerical outputs. SI internally; conversion boundaries explicitly named.
 
 ## Milestones
 - Audit and scope: VERIFIED
-- Repository scaffold/recovery record: IN PROGRESS
-- Material and quantum-well model: NOT STARTED
+- Repository scaffold/recovery record: VERIFIED, PUBLISHED
+- Material and quantum-well source: VERIFIED, PUBLISHED; supporting tests/docs publication in progress
 - Populations and gain: NOT STARTED
 - Cavity, threshold and dynamics: NOT STARTED
 - Reproducible studies/figures/documentation: NOT STARTED
 - Adversarial audit, package, CI, release: NOT STARTED
 
 ## Scientific validation and test status
-No scientific implementation yet; no passing-test claim.
+Six scientific tests pass: GaAs reference gap, mass-interface matching, normalization, infinite-barrier limit, width/barrier trends and an independent conservative finite-difference refinement.
 Required checks: finite-well roots vs independent finite differences, infinite-well
 limit, carrier-population integrals, gain sign/transparency, cavity round trip,
 steady-state balance vs integration, independent integrators/tolerance refinement,
@@ -54,7 +54,17 @@ prescribed junction temperature; no self-heating prediction. No experimental
 validation claimed. AI-assisted development and execution of validation.
 
 ## Next action
-Publish this scaffold, then verify parameter sources and implement the finite well.
+Publish material/finite-well milestone; next implement quasi-Fermi populations and gain.
 
 ## Latest verified GitHub checkpoint
-4855613e61c333811fd42bde4cc2bbee58ed3002 — repository created and verified.
+0d322a924d6294f4f6ba2daebf489bfb687eb712 — material and quantum-well source;
+remote source compared byte-for-byte with local files on 1 October 2026.
+Publication gate rerun: 6 passed in 0.37 s; no solver changes.
+
+## Resolved validation findings
+The independent finite-difference benchmark initially used the wrong average at
+a mass interface. Series resistance requires arithmetic mass (harmonic inverse
+mass), not arithmetic inverse mass. Correcting the independent discretization
+restored second-order convergence. Refining to 0.025 nm meets the original 2 µeV
+error gate. The infinite-barrier test uses a deliberately nonphysical 1000 eV
+barrier to approach the mathematical limit; not a material parameter.
